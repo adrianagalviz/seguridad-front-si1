@@ -1,4 +1,5 @@
-import { Navigate, Outlet, useLocation } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
+import LayoutPrincipal from "../componentes/layout/LayoutPrincipal";
 import { rutasSistema } from "../configuracion/rutasSistema";
 import { usarAutenticacion } from "../contexto/ContextoAutenticacion";
 
@@ -20,7 +21,7 @@ function RutasPrivadas() {
     return <Navigate replace state={{ desde: ubicacion }} to={rutasSistema.login} />;
   }
 
-  return <Outlet />;
+  return <LayoutPrincipal />;
 }
 
 export default RutasPrivadas;
