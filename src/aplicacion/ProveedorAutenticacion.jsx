@@ -52,7 +52,6 @@ function ProveedorAutenticacion({ children }) {
   }
 
   async function iniciarSesion(credenciales) {
-    setCargando(true);
     setErrorAutenticacion("");
 
     try {
@@ -62,8 +61,6 @@ function ProveedorAutenticacion({ children }) {
     } catch (error) {
       await protegerSesionInvalida(error);
       throw error;
-    } finally {
-      setCargando(false);
     }
   }
 

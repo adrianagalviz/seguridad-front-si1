@@ -4,9 +4,11 @@ import { manejarErrorSupabase } from "../../../utilidades/manejarErrores";
 import { obtenerPermisosPorRol } from "./servicioPermisos";
 
 export async function obtenerUsuarioInternoPorCorreo(correoAcceso) {
+  const correoNormalizado = String(correoAcceso || "").trim();
+
   const { data, error } = await consultarTabla(tablasSistema.usuario)
     .select("id_usuario,id_empleado,id_rol,correo_acceso,estado,fecha_creacion")
-    .eq("correo_acceso", correoAcceso)
+    .ilike("correo_acceso", correoNormalizado)
     .maybeSingle();
 
   if (error) {
@@ -14,7 +16,9 @@ export async function obtenerUsuarioInternoPorCorreo(correoAcceso) {
   }
 
   if (!data) {
-    throw new Error("No existe un usuario interno asociado a este correo.");
+    throw new Error(
+      "No existe un usuario interno asociado a este correo.",
+    );
   }
 
   if (!data.estado) {

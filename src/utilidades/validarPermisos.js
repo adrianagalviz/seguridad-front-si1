@@ -12,8 +12,9 @@ export function obtenerNombreRolNormalizado(rol) {
 
 export function tieneRol(rolActual, rolesPermitidos = []) {
   const rolNormalizado = obtenerNombreRolNormalizado(rolActual);
+  const listaRoles = Array.isArray(rolesPermitidos) ? rolesPermitidos : [rolesPermitidos];
 
-  return rolesPermitidos.map(normalizarTexto).includes(rolNormalizado);
+  return listaRoles.map(normalizarTexto).includes(rolNormalizado);
 }
 
 export function esAdministrador(rolActual) {
